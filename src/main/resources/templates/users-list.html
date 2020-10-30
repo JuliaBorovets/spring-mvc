@@ -22,7 +22,7 @@
         <td th:text="${iStat.index + 1}" />
         <td th:text="${user.id}" />
         <td>
-            <a th:href="@{|/todos/all/users/${user.id}|}" th:text="${user.firstName + ' ' + user.lastName}" />
+            <a th:href="@{|/users/${user.id}/read|}" th:text="${user.firstName + ' ' + user.lastName}" />
         </td>
         <td th:text="${user.email}"/>
 

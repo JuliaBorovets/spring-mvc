@@ -5,6 +5,39 @@
     <title>User Info</title>
 </head>
 <body>
-
+<div th:replace="header"></div>
+<h2>Info about User</h2>
+<table>
+    <tr>
+        <td>Id:</td>
+        <td>
+            <b th:text="${user.id}"></b>
+        </td>
+    </tr>
+    <tr>
+        <td>First name:</td>
+        <td>
+            <b th:text="${user.firstName}"></b>
+        </td>
+    </tr>
+    <tr>
+        <td>Last name</td>
+        <td>
+            <b th:text="${user.lastName}"></b>
+        </td>
+    </tr>
+    <tr>
+        <td>E-mail:</td>
+        <td>
+            <b th:text="${user.email}"></b>
+        </td>
+    </tr>
+    <tr>
+        <td>Role:</td>
+        <td>
+            <b th:text="${user.role.name}"></b>
+        </td>
+    </tr>
+</table>
 </body>
 </html>

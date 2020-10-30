@@ -1,15 +1,30 @@
 package com.softserve.itacademy.controller;
 
+import com.softserve.itacademy.model.User;
+import com.softserve.itacademy.service.RoleService;
+import com.softserve.itacademy.service.UserService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/users")
 public class UserController {
+    private final UserService userService;
+    private final RoleService roleService;
+
+
+    public UserController(UserService userService, RoleService roleService) {
+        this.userService = userService;
+        this.roleService = roleService;
+    }
 
     //add needed fields
 
-//    @GetMapping("/create")
+    //    @GetMapping("/create")
 //    public String create(//add needed parameters) {
 //        //ToDo
 //        return " ";
@@ -21,19 +36,41 @@ public class UserController {
 //        return " ";
 //    }
 //
-//    @GetMapping("/{id}/read")
-//    public String read(//add needed parameters) {
-//        //ToDo
-//        return " ";
-//    }
-//
-//    @GetMapping("/{id}/update")
-//    public String update(//add needed parameters) {
-//        //ToDo
-//        return " ";
-//    }
-//
-//
+
+    @GetMapping("/{id}/read")
+    public String read(@PathVariable long id, Model model) {
+        User user = userService.readById(id);
+        model.addAttribute("user", user);
+        return "user-info";
+    }
+
+    @PostMapping("/{id}/update")
+    public String update(@PathVariable long id, @RequestParam("oldPassword") String oldPassword,
+                         @RequestParam("roleId") long roleId, Model model,
+                         @Validated @ModelAttribute("user") User user, BindingResult result) {
+        User oldUser = userService.readById(id);
+        System.out.println("USVER1 ==" + userService.readById(id).getRole().toString());
+        if (result.hasErrors()) {
+            user.setRole(oldUser.getRole());
+            model.addAttribute("roles", roleService.getAll());
+            return "update-user";
+        }
+
+        userService.update(user);
+        System.out.println("USVER2 ==" + userService.readById(id).getRole().toString());
+        return "redirect:/users/" + id + "/read";
+    }
+
+    @GetMapping("/{id}/update")
+    public String update(@PathVariable long id, Model model) {
+        User user = userService.readById(id);
+        model.addAttribute("user", user);
+        model.addAttribute("roles", roleService.getAll());
+        return "update-user";
+    }
+
+
+
 //    @GetMapping("/{id}/delete")
 //    public String delete(//add needed parameters) {
 //        //ToDo
