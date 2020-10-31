@@ -25,7 +25,9 @@
         <td th:text="${toDo.id}"> id </td>
         <td th:text="${toDo.title}"> title </td>
         <td th:text="${#temporals.format(toDo.createdAt, 'dd.MM.yyyy HH:mm')}"> createdAt </td>
-        <td th:text="${toDo.owner.firstName + ' ' + toDo.owner.lastName}"> owner </td>
+        <td >
+            <a th:href="@{|/todos/all/users/${toDo.getOwner().id}|}" th:text="${toDo.owner.firstName + ' ' + toDo.owner.lastName}"></a>
+        </td>
     </tr>
 </table>
 
