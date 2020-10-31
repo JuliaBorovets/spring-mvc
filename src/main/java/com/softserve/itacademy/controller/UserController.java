@@ -51,7 +51,7 @@ public class UserController {
     public String update(@PathVariable long id, Model model,
                          @Validated @ModelAttribute("user") UserDto userDto, BindingResult result) {
         if (result.hasErrors()) {
-            return "reidrect:/users/{id}/update";
+            return "redirect:/users/{id}/update";
         }
 
         User user = UserTransformer.convertToUser(userDto);
