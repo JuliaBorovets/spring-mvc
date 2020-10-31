@@ -76,7 +76,7 @@
                 <label for="role">Role:</label>
             </td>
             <td>
-                <select name="roleId" id="role">
+                <select name="roleId" id="role" th:field="*{role.id}">
                         <span th:each="role : ${roles}">
                             <option th:if="${role.id == user.role.id}" th:value="${role.id}" th:selected="${true}"
                                     th:text="${role.name.substring(0, 1) + role.name.substring(1).toLowerCase()}"/>
