@@ -32,9 +32,11 @@
     <tr th:each="toDo ,i: ${todoList}">
         <td th:text="${i.index + 1}"></td>
         <td th:text="${toDo.id}"> id </td>
-        <td th:text="${toDo.title}"> title </td>
+        <td>
+            <a th:href="@{|/todos/${toDo.id}/tasks|}"  th:text="${toDo.title}"></a>
+        </td>
         <td th:text="${#temporals.format(toDo.createdAt, 'dd.MM.yyyy HH:mm')}"> createdAt </td>
-        <td th:text="${toDo.owner.firstName + ' ' + toDo.owner.lastName}"> owner </td>
+        <td th:text="${toDo.owner.firstName + ' ' + toDo.owner.lastName}"></td>
         <td>
             <a th:href="@{|/todos/${toDo.id}/update/users/${user_id}|}" th:text="Edit"></a>
         </td>
