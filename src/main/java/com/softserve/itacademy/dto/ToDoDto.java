@@ -15,17 +15,14 @@ public class ToDoDto {
 
     private Long ownerId;
 
-    private String owner;
-
     public ToDoDto() {
     }
 
-    public ToDoDto(long id, String title, String createdAt, Long ownerId, String owner) {
+    public ToDoDto(long id, String title, String createdAt, Long ownerId) {
         this.id = id;
         this.title = title;
         this.createdAt = createdAt;
         this.ownerId = ownerId;
-        this.owner = owner;
     }
 
     public long getId() {
@@ -60,14 +57,6 @@ public class ToDoDto {
         this.ownerId = ownerId;
     }
 
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
     @Override
     public String toString() {
         return "ToDoDto{" +
@@ -75,7 +64,6 @@ public class ToDoDto {
                 ", title='" + title + '\'' +
                 ", createdAt='" + createdAt + '\'' +
                 ", ownerId=" + ownerId +
-                ", owner='" + owner + '\'' +
                 '}';
     }
 }

@@ -6,7 +6,9 @@
 </head>
 <body>
 
-<h2 align="center">List of Tasks</h2>
+<div th:replace="header"></div>
+
+<h2 align="center">List of ToDos</h2>
 
 <table border="1" align="center">
     <tr>
@@ -23,8 +25,8 @@
         <td th:text="${i.index + 1}"></td>
         <td th:text="${toDo.id}"> id </td>
         <td th:text="${toDo.title}"> title </td>
-        <td th:text="${toDo.createdAt}"> createdAt </td>
-        <td th:text="${toDo.owner}"> owner </td>
+        <td th:text="${#temporals.format(toDo.createdAt, 'dd.MM.yyyy HH:mm')}"> createdAt </td>
+        <td th:text="${toDo.owner.firstName + ' ' + toDo.owner.lastName}"> owner </td>
         <td>
             <a th:href="@{|/todos/${toDo.id}/update/users/${user_id}|}" th:text="Edit"></a>
         </td>

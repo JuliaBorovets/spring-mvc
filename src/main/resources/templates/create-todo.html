@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<br>
+<div th:replace="header"></div>
 
 <h3 align="center">Create new ToDo:</h3>
 
@@ -32,6 +32,8 @@
         </tr>
     </table>
 </form>
+
+<a th:href="@{|/todos/all/users/${owner_id}|}"> Go to ToDoLists</a>
 
 </body>
 </html>

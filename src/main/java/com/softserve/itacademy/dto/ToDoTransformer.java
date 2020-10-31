@@ -11,8 +11,7 @@ public class ToDoTransformer {
                 toDo.getId(),
                 toDo.getTitle(),
                 toDo.getCreatedAt().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")),
-                toDo.getOwner().getId(),
-                toDo.getOwner().getFirstName() + ' ' + toDo.getOwner().getLastName()
+                toDo.getOwner().getId()
         );
     }
 

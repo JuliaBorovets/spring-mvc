@@ -48,7 +48,7 @@ public class ToDoController {
     @GetMapping("/{id}/tasks")
     public String read(@PathVariable("id") Long id, Model model) {
         model.addAttribute("todo", toDoService.readById(id));
-        //todo create template
+        model.addAttribute("collaborators", userService.getAll());
         return "todo-tasks";
     }
 
@@ -82,16 +82,13 @@ public class ToDoController {
 
     @GetMapping("/all/users/{user_id}")
     public String getAll(@PathVariable("user_id") Long userId, Model model) {
-        List<ToDoDto> toDoList = toDoService.getByUserId(userId)
-                .stream()
-                .map(ToDoTransformer::convertToDto)
-                .collect(Collectors.toList());
-        model.addAttribute("todoList", toDoList);
+        model.addAttribute("todoList", toDoService.getByUserId(userId));
         return "todos-user";
     }
 
     @GetMapping("/{id}/add")
-    public String addCollaborator(@PathVariable("id") Long id, @RequestParam("coll_id") Long collaboratorId) {
+    public String addCollaborator(@PathVariable("id") Long id, @RequestParam("coll_id") Long collaboratorId,
+                                  Model model) {
         toDoService.addCollaborator(id, collaboratorId);
         return "redirect:/todos/{id}/tasks";
     }
@@ -100,5 +97,11 @@ public class ToDoController {
     public String removeCollaborator(@PathVariable("id") Long id, @RequestParam("coll_id") Long collaboratorId) {
         toDoService.removeCollaborator(id, collaboratorId);
         return "redirect:/todos/{id}/tasks";
+    }
+
+    @GetMapping("/all")
+    public String getAllToDoList(Model model) {
+        model.addAttribute("todoList", toDoService.getAll());
+        return "todo-lists";
     }
 }

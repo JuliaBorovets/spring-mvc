@@ -6,6 +6,87 @@
 </head>
 <body>
 
+<div th:replace="header"></div>
 
+<h2 align="center" th:text="|All tasks from ${todo.title}|"></h2>
+
+<div align="center">
+    <a th:href="@{|/tasks/create/todos/${todo.id}|}">
+        <button> Create Task</button>
+    </a>
+    <br>
+    <h3>Tasks:</h3>
+</div>
+
+<div align="center">
+
+    <table border="1">
+        <tr>
+            <th>No.</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Priority</th>
+            <th>State</th>
+            <th colspan="2">Operations</th>
+        </tr>
+
+
+        <tr th:each="task ,i: ${todo.getTasks()}">
+            <td th:text="${i.index + 1}"></td>
+            <td th:text="${task.id}"> id</td>
+            <td th:text="${task.name}"> name</td>
+            <td th:text="${task.getPriority().name().substring(0, 1) + task.getPriority().name().substring(1).toLowerCase()}">
+                priority
+            </td>
+            <td th:text="${task.getState().name}"> state</td>
+            <td>
+                <a th:href="@{|/tasks/${task.id}/update/todos/${todo.id}|}" th:text="Edit"></a>
+            </td>
+            <td>
+                <a th:href="@{|/tasks/${task.id}/delete/todos/${todo.id}|}" th:text="Remove"></a>
+            </td>
+        </tr>
+
+    </table>
+</div>
+
+<br>
+<div align="center">
+    <h3>Collaborators:</h3>
+</div>
+
+<form th:action="@{|/todos/${todo.id}/add|}">
+    <div align="center">
+        <label>Select collaborator: </label>
+        <br>
+        <select class="form-control" th:name="coll_id" required>
+            <option style="display:none;"></option>
+            <option th:each="c : ${collaborators}"
+                    th:value="${c.id}"
+                    th:text="${c.firstName + ' ' + c.lastName}">
+            </option>
+        </select>
+        <br>
+        <input type="submit" value="Add">
+    </div>
+</form>
+
+<br>
+<div align="center">
+
+    <table border="1">
+
+        <tr th:each="c ,i: ${todo.getCollaborators()}">
+            <td th:text="${i.index + 1}"></td>
+            <td th:text="${c.firstName + ' ' + c.lastName}"> collaborator </td>
+            <td>
+                <a th:href="@{|/todos/${todo.id}/remove?coll_id=${c.id}}|" th:text="Remove"></a>
+            </td>
+        </tr>
+
+    </table>
+</div>
+
+<br>
 </body>
 </html>
