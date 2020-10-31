@@ -5,6 +5,34 @@
     <title>List of Users</title>
 </head>
 <body>
+<h2>List of Users</h2>
+<form th:action="@{/users/create}" method="get">
+    <input type="submit" value="Create new User">
+</form>
+<br>
+<table border="1">
+    <tr>
+        <th>No.</th>
+        <th>Id</th>
+        <th>Full name</th>
+        <th>E-mail</th>
+        <th colspan="2">Operations</th>
+    </tr>
+    <tr th:each="user, iStat: ${users}">
+        <td th:text="${iStat.index + 1}" />
+        <td th:text="${user.id}" />
+        <td>
+            <a th:href="@{|/users/${user.id}/read|}" th:text="${user.firstName + ' ' + user.lastName}" />
+        </td>
+        <td th:text="${user.email}"/>
 
+        <td>
+            <a th:href="@{|/users/${user.id}/update|}">Edit</a>
+        </td>
+        <td>
+            <a th:href="@{|/users/${user.id}/delete|}">Remove</a>
+        </td>
+    </tr>
+</table>
 </body>
 </html>

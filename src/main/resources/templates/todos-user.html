@@ -6,5 +6,45 @@
 </head>
 <body>
 
+<div th:replace="header"></div>
+
+<div align="center">
+    <h2 align="center" th:text="|All ToDo Lists of ${user.firstName + ' ' + user.lastName}|"></h2>
+
+    <a th:href="@{|/todos/create/users/${user_id}|}">
+        <button> Create new ToDo List</button>
+    </a>
+</div>
+
+<br>
+
+<table border="1" align="center">
+    <tr>
+        <th>No.</th>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Created At</th>
+        <th>Owner</th>
+        <th colspan="2">Operations</th>
+    </tr>
+
+
+    <tr th:each="toDo ,i: ${todoList}">
+        <td th:text="${i.index + 1}"></td>
+        <td th:text="${toDo.id}"> id </td>
+        <td>
+            <a th:href="@{|/todos/${toDo.id}/tasks|}"  th:text="${toDo.title}"></a>
+        </td>
+        <td th:text="${#temporals.format(toDo.createdAt, 'dd.MM.yyyy HH:mm')}"> createdAt </td>
+        <td th:text="${toDo.owner.firstName + ' ' + toDo.owner.lastName}"></td>
+        <td>
+            <a th:href="@{|/todos/${toDo.id}/update/users/${user_id}|}" th:text="Edit"></a>
+        </td>
+        <td>
+            <a th:href="@{|/todos/${toDo.id}/delete/users/${user_id}|}" th:text="Remove"></a>
+        </td>
+    </tr>
+
+</table>
 </body>
 </html>

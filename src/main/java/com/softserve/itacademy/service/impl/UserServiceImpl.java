@@ -20,25 +20,30 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(User user) {
-            return userRepository.save(user);
+        return userRepository.save(user);
     }
 
     @Override
     public User readById(long id) {
         Optional<User> optional = userRepository.findById(id);
-            return optional.get();
+        return optional.get();
     }
 
     @Override
     public User update(User user) {
-            User oldUser = readById(user.getId());
-                return userRepository.save(user);
+        User oldUser = readById(user.getId());
+        oldUser.setFirstName(user.getFirstName());
+        oldUser.setLastName(user.getLastName());
+        oldUser.setEmail(user.getEmail());
+        oldUser.setPassword(user.getPassword());
+        oldUser.setRole(user.getRole());
+        return userRepository.save(oldUser);
     }
 
     @Override
     public void delete(long id) {
         User user = readById(id);
-            userRepository.delete(user);
+        userRepository.delete(user);
     }
 
     @Override

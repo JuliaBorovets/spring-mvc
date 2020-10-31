@@ -25,4 +25,13 @@ public class TaskTransformer {
         task.setState(state);
         return task;
     }
+
+    public static Task convertToEntity(TaskDto taskDto, State state) {
+        Task task = new Task();
+        task.setId(taskDto.getId());
+        task.setName(taskDto.getName());
+        task.setPriority(Priority.valueOf(taskDto.getPriority()));
+        task.setState(state);
+        return task;
+    }
 }
