@@ -8,7 +8,7 @@
 
 <div th:replace="header"></div>
 
-<h2 align="center">Edit existing Task</h2>
+<h2 align="center">Edit existing ToDo</h2>
 
 <form th:action="@{|/todos/${todo_id}/update/users/${owner_id}|}" th:object="${toDo}" method="post">
 
@@ -16,7 +16,7 @@
 
         <tr>
             <td>
-                <label for="id">Title: </label>
+                <label for="id">Id: </label>
             </td>
             <td>
                 <input type="number" id="id" name="id" th:field="*{id}" disabled/>

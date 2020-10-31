@@ -6,5 +6,73 @@
 </head>
 <body>
 
+
+<div th:replace="header"></div>
+
+<h2 align="center">Edit existing Task</h2>
+
+<form th:action="@{|/tasks/${task_id}/update/todos/${todo_id}|}" th:object="${taskDto}" method="post">
+
+    <table align="center">
+
+        <tr>
+            <td>
+                <label for="id">Id: </label>
+            </td>
+            <td>
+                <input type="number" id="id" name="id" th:field="*{id}" disabled/>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label for="name">Name: </label>
+            </td>
+            <td>
+                <input type="text" id="name" name="name" th:field="*{name}" required/>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label for="priority">Priority: </label>
+            </td>
+            <td>
+                <select id="priority" th:field="*{priority}">
+                    <option th:each="p : ${priorities}"
+                            th:value="${p.name()}"
+                            th:text="${p.name().substring(0, 1) + p.name().substring(1).toLowerCase()}"
+                            th:selected="*{priority}">
+                    </option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label for="state">Status: </label>
+            </td>
+            <td>
+                <select id="state" th:field="*{stateId}">
+                    <option th:each="s : ${states}"
+                            th:value="${s.id}"
+                            th:text="${s.name}"
+                            th:selected="*{stateId}">
+                    </option>
+                </select>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                <input type="submit" value="Update">
+            </td>
+        </tr>
+    </table>
+</form>
+
+<a th:href="@{|/todos/${todo_id}/tasks|}"> Go to TaskList</a>
+
 </body>
 </html>

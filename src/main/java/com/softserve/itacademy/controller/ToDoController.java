@@ -61,7 +61,7 @@ public class ToDoController {
 
     @PostMapping("/{todo_id}/update/users/{owner_id}")
     public String update(@PathVariable("todo_id") Long todoId, @PathVariable("owner_id") Long ownerId,
-                         @Valid @ModelAttribute("toDo") ToDoDto toDo, BindingResult bindingResult, Model model) {
+                         @Valid @ModelAttribute("toDo") ToDoDto toDo, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "redirect:/todos/{todo_id}/update/users/{owner_id}";

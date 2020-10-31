@@ -19,25 +19,28 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task create(Task user) {
-            return taskRepository.save(user);
+        return taskRepository.save(user);
     }
 
     @Override
     public Task readById(long id) {
         Optional<Task> optional = taskRepository.findById(id);
-            return optional.get();
+        return optional.get();
     }
 
     @Override
     public Task update(Task task) {
-            Task oldTask = readById(task.getId());
-                return taskRepository.save(task);
+        Task oldTask = readById(task.getId());
+        oldTask.setName(task.getName());
+        oldTask.setPriority(task.getPriority());
+        oldTask.setState(task.getState());
+        return taskRepository.save(oldTask);
     }
 
     @Override
     public void delete(long id) {
         Task task = readById(id);
-            taskRepository.delete(task);
+        taskRepository.delete(task);
     }
 
     @Override
