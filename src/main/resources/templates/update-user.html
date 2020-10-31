@@ -76,17 +76,16 @@
                 <label for="role">Role:</label>
             </td>
             <td>
-                <select name="roleId" id="role">
-                        <span th:each="role : ${roles}">
-                            <option th:if="${role.id == user.role.id}" th:value="${role.id}" th:selected="${true}"
-                                    th:text="${role.name.substring(0, 1) + role.name.substring(1).toLowerCase()}"/>
-                            <option th:unless="${role.id == user.role.id}" th:value="${role.id}"
-                                    th:text="${role.name.substring(0, 1) + role.name.substring(1).toLowerCase()}"/>
-                        </span>
+                <select id="role" th:field="*{roleId}">
+                    <option th:each="r : ${roles}"
+                            th:value="${r.id}"
+                            th:text="${r.name}"
+                            th:selected="*{roleId}">
+                    </option>
                 </select>
             </td>
             <td>
-                <span th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></span>
+                <span th:if="${#fields.hasErrors('roleId')}" th:errors="*{roleId}"></span>
             </td>
         </tr>
         <tr>
