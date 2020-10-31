@@ -8,7 +8,15 @@
 
 <div th:replace="header"></div>
 
-<h2 align="center">List of ToDos</h2>
+<div align="center">
+    <h2 align="center" th:text="|All ToDo Lists of ${user.firstName + ' ' + user.lastName}|"></h2>
+
+    <a th:href="@{|/todos/create/users/${user_id}|}">
+        <button> Create new ToDo List</button>
+    </a>
+</div>
+
+<br>
 
 <table border="1" align="center">
     <tr>
